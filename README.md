@@ -14,7 +14,7 @@ pytest для реализации автотестов.
 
 Команда для записка тестов:
 
-```
+``` python
 py.test pytests
 ```
 
@@ -24,33 +24,78 @@ py.test pytests
 
 Данный скрипт можно запускать с параметром, где указываем строку, необходимую для парсинга.
 
-```python
+``` python
 python task_1.py esdfd((esdf)(esdf
 ```
 
 
+### SQL
+
+#TODO: сомневаюсь, перепроверить оба варианта на БД
+
+Вариант 1:
+
+``` sql
+SELECT 
+    phones.phone, 
+    "sum"(q.count) 
+FROM phones
+LEFT OUTER JOIN 
+(SELECT 
+    user_id, 
+    "count"("id") AS count 
+ FROM items WHERE status = 7  GROUP BY user_id
+) AS q 
+ON q.user_id = ANY(phones.users)
+GROUP BY phones.phone;
+
+```
+
+
+Вариант 2:
+
+``` sql
+SELECT 
+    phones.phone, 
+    "sum"(q.saled) as saled, 
+    "sum"(q.not_saled) as not_saled 
+FROM phones
+LEFT OUTER JOIN 
+(SELECT 
+	user_id, 
+	sum(case when status = 7 then 1 else 0 end) as saled,
+	sum(case when status = 3 then 1 else 0 end) as not_saled
+	FROM items GROUP BY user_id
+) AS q 
+ON q.user_id = ANY(phones.users)
+GROUP BY phones.phone;
+
+```
 
 ###  GIT.
  
-```bash
+``` bash
 $ git init
 $ echo first_commit_master > README.md
 $ git add .
 $ git commit -m 'FIRST'
+
 ```
 
-```bash
+``` bash
 $ git branch feature_1
 $ git checkout feature_1
+
 ```
 
 **OR**
 
-```bash
+``` bash
 $ git branch -b feature_1
+
 ```
 
-```bash
+``` bash
 $ echo commit_feature_1_first >> README.md
 $ git commit -a -m 'commit_feature_1_first'
 $ echo commit_feature_1_second >> README.md
@@ -78,4 +123,5 @@ Date:   Mon Jul 11 20:40:23 2016 +0300
 $ git reset --hard 33ee43abc4af94a49b54c4d6740abf7cb25f420e
 $ git checkout master
 $ git merge feature_1
+
 ```
