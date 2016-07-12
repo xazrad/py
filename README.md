@@ -44,6 +44,12 @@ Category.objects.filter(product__price__gte=100).annotate(count_c=Count('product
 
 ```
 
+## 2.c
+
+``` python
+Product.objects.values_list('category__name', 'name', 'price')
+
+```
 
 
 ### Задание SQL
