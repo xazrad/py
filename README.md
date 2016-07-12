@@ -80,6 +80,8 @@ birthday = models.DateField(null=True, blank=False)
 
 ### Задание 4. Проектирование
 
+
+
 ### Задание 5. SQL
 
 Вариант 1:
