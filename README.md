@@ -52,7 +52,35 @@ Product.objects.values_list('category__name', 'name', 'price')
 ```
 
 
-### Задание SQL
+### Задание 3. Additional questions
+
+## 3.a
+``` python
+iv. Abstract base classes
+
+```
+
+## 3.b
+``` python
+class CustomQuerySet(QuerySet):
+    def delete(self):
+        self.update(active=False)
+
+    def delete_real(self):
+        super(CustomQuerySet, self).delete()
+
+```
+
+## 3.c
+``` python
+birthday = models.DateField(null=True, blank=False)
+
+```
+
+
+### Задание 4. Проектирование
+
+### Задание 5. SQL
 
 Вариант 1:
 
@@ -93,7 +121,7 @@ GROUP BY phones.phone;
 
 ```
 
-###  Задание GIT.
+###  Задание 6. GIT.
  
 ``` bash
 $ git init
