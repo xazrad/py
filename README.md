@@ -29,9 +29,24 @@ python task_1.py esdfd((esdf)(esdf
 ```
 
 
-### SQL
+### Задание 2. Django ORM
 
-TODO: сомневаюсь, перепроверить оба варианта на БД
+## 2.a
+``` python
+Category.objects.filter(product__price__gte=100).annotate(Count('product'))
+
+```
+
+
+## 2.b
+``` python
+Category.objects.filter(product__price__gte=100).annotate(count_c=Count('product')).filter(count_c__gt=10)
+
+```
+
+
+
+### Задание SQL
 
 Вариант 1:
 
@@ -72,7 +87,7 @@ GROUP BY phones.phone;
 
 ```
 
-###  GIT.
+###  Задание GIT.
  
 ``` bash
 $ git init
