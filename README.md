@@ -32,6 +32,7 @@ python task_1.py esdfd((esdf)(esdf
 ### Задание 2. Django ORM
 
 ## 2.a
+
 ``` python
 Category.objects.filter(product__price__gte=100).annotate(Count('product'))
 
@@ -39,6 +40,7 @@ Category.objects.filter(product__price__gte=100).annotate(Count('product'))
 
 
 ## 2.b
+
 ``` python
 Category.objects.filter(product__price__gte=100).annotate(count_c=Count('product')).filter(count_c__gt=10)
 
@@ -55,12 +57,14 @@ Product.objects.values_list('category__name', 'name', 'price')
 ### Задание 3. Additional questions
 
 ## 3.a
+
 ``` python
 iv. Abstract base classes
 
 ```
 
 ## 3.b
+
 ``` python
 class CustomQuerySet(QuerySet):
     def delete(self):
@@ -72,6 +76,7 @@ class CustomQuerySet(QuerySet):
 ```
 
 ## 3.c
+
 ``` python
 birthday = models.DateField(null=True, blank=False)
 
@@ -80,7 +85,7 @@ birthday = models.DateField(null=True, blank=False)
 
 ### Задание 4. Проектирование
 
-
+![ Решение ](data/discont.png)
 
 ### Задание 5. SQL
 
