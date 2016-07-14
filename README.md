@@ -96,16 +96,13 @@ birthday = models.DateField(null=True, blank=False)
 
 ``` sql
 SELECT 
-    phones.phone, 
-    "sum"(q.count) 
+    phones.phone,
+    count(items.id) 
 FROM phones
 LEFT OUTER JOIN 
-(SELECT 
-    user_id, 
-    "count"("id") AS count 
- FROM items WHERE status = 7  GROUP BY user_id
-) AS q 
-ON q.user_id = ANY(phones.users)
+items
+ON items.user_id = ANY(phones.users)
+WHERE (items.status = 7 AND phones.phone IN ('9656261100', '9991570101', '9991570102'))
 GROUP BY phones.phone;
 
 ```
@@ -116,17 +113,12 @@ GROUP BY phones.phone;
 ``` sql
 SELECT 
     phones.phone, 
-    "sum"(q.saled) as saled, 
-    "sum"(q.not_saled) as not_saled 
+    sum(case when items.status = 7 then 1 else 0 end) as saled,
+    sum(case when items.status = 3 then 1 else 0 end) as not_saled
 FROM phones
 LEFT OUTER JOIN 
-(SELECT 
-	user_id, 
-	sum(case when status = 7 then 1 else 0 end) as saled,
-	sum(case when status = 3 then 1 else 0 end) as not_saled
-	FROM items GROUP BY user_id
-) AS q 
-ON q.user_id = ANY(phones.users)
+items
+ON items.user_id = ANY(phones.users)
 GROUP BY phones.phone;
 
 ```
