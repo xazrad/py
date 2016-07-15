@@ -119,7 +119,7 @@ FROM phones
 LEFT OUTER JOIN 
 items
 ON items.user_id = ANY(phones.users)
-WHERE (items.status = 7 AND phones.phone IN ('9656261100', '9991570101', '9991570102'))
+AND items.status = 7 AND phones.phone IN ('9656261100', '9991570101', '9991570102')
 GROUP BY phones.phone;
 
 ```
